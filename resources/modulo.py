@@ -4,18 +4,6 @@ from flask_jwt_extended import jwt_required
 import sqlite3
 
 
-# path /modulos?data_min=20/05/2022&data_max=22/05/2022
-path_params = reqparse.RequestParser()
-path_params.add_argument('corrente_min', type=float)
-path_params.add_argument('corrente_max', type=float)
-path_params.add_argument('tensao_min', type=float)
-path_params.add_argument('tensao_max', type=float)
-path_params.add_argument('data_registro', type=str)
-path_params.add_argument('hora', type=str)
-path_params.add_argument('limit', type=float)
-path_params.add_argument('offset', type=float)
-
-
 class Modulos(Resource):
     def get(self):
         return {'modulos': [modulo.json() for modulo in ModuloModel.query.all()]}
@@ -26,8 +14,8 @@ class Modulo(Resource):
     argumentos.add_argument('tensao', type=float, required=True, help="O campo 'tensao' não pode ser deixado em branco")
     argumentos.add_argument('corrente', type=float, required=True, help="O campo 'corrente' não pode ser deixado em "
                                                                         "branco")
-    argumentos.add_argument('data_registro', type=str, required=True, help="O campo 'data_registro' não pode ser deixado em branco")
-    argumentos.add_argument('hora', type=str, required=True, help="O campo 'data' não pode ser deixado em branco")
+    argumentos.add_argument('data_hora', type=str, required=True, help="O campo 'data_hora' não pode ser deixado em "
+                                                                       "branco")
 
     @jwt_required()
     def get(self, modulo_id):

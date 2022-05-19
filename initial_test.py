@@ -30,7 +30,6 @@ def token_de_acesso_invalidado(jwt_header, jwt_payload):
 
 # http://127.0.0.1:5000/medidas
 api.add_resource(Modulos, '/modulos')
-api.add_resource(Modulo, '/modulos/<string:modulo_id>')
 api.add_resource(User, '/usuarios/<int:user_id>')
 api.add_resource(UserRegister, '/cadastro')
 api.add_resource(UserLogin, '/login')

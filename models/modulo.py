@@ -2,28 +2,22 @@ from sql_alchemy import banco
 
 
 class ModuloModel(banco.Model):
-    __tablename__ = 'modulos'
+    __tablename__ = 'Módulos'
 
-    modulo_id = banco.Column(banco.String, primary_key=True)
-    corrente = banco.Column(banco.Float(precision=3))
-    tensao = banco.Column(banco.Float(precision=3))
-    data_registro = banco.Column(banco.String(10))
-    hora = banco.Column(banco.String(5))
+    corrente = banco.Column(banco.String(15))
+    tensao = banco.Column(banco.String(15))
+    data_hora = banco.Column(banco.String(20))
 
-    def __init__(self, modulo_id, corrente, tensao, data_registro, hora):
-        self.modulo_id = modulo_id
+    def __init__(self, corrente, tensao, data_hora):
         self.corrente = corrente
         self.tensao = tensao
-        self.data_registro = data_registro
-        self.hora = hora
+        self.data_hora = data_hora
 
     def json(self):
         return {
-            'modulo_id': self.modulo_id,
             'corrente': self.corrente,
             'tensao': self.tensao,
-            'data_registro': self.data_registro,
-            'hora': self.hora
+            'data_hora': self.data_hora
         }
 
     @classmethod
@@ -37,11 +31,10 @@ class ModuloModel(banco.Model):
         banco.session.add(self)
         banco.session.commit()
 
-    def update_modulo(self, corrente, tensao, data_registro, hora):
+    def update_modulo(self, corrente, tensao, data_hora):
         self.corrente = corrente
         self.tensao = tensao
-        self.data_registro = data_registro
-        self.hora = hora
+        self.data_hora = data_hora
 
     def delete_modulo(self):
         banco.session.delete(self)
