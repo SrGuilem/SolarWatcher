@@ -18,7 +18,7 @@ path_params.add_argument('offset', type=float)
 
 class Modulos(Resource):
     def get(self):
-        return {'modulos': [modulo.json() for modulo in ModuloModel.query.all()]}
+        return {'Módulos': [modulo.json() for modulo in ModuloModel.query.all()]}
 
 
 class Modulo(Resource):
