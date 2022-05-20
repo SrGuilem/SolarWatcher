@@ -2,8 +2,8 @@ from sql_alchemy import banco
 
 
 class ModuloModel(banco.Model):
-    __tablename__ = 'Módulos'
-
+    __tablename__ = 'modulos'
+    modulo_id = banco.Column(banco.Integer(), primary_key=True)
     corrente = banco.Column(banco.String(15))
     tensao = banco.Column(banco.String(15))
     data_hora = banco.Column(banco.String(20))

@@ -4,11 +4,6 @@ from flask_jwt_extended import jwt_required
 import sqlite3
 
 
-class Modulos(Resource):
-    def get(self):
-        return {'modulos': [modulo.json() for modulo in ModuloModel.query.all()]}
-
-
 class Modulo(Resource):
     argumentos = reqparse.RequestParser()
     argumentos.add_argument('tensao', type=float, required=True, help="O campo 'tensao' não pode ser deixado em branco")
@@ -17,19 +12,16 @@ class Modulo(Resource):
     argumentos.add_argument('data_hora', type=str, required=True, help="O campo 'data_hora' não pode ser deixado em "
                                                                        "branco")
 
-    @jwt_required()
-    def get(self, modulo_id):
-        modulo = ModuloModel.find_modulo(modulo_id)
-        if modulo:
-            return modulo.json()
-        return {'message': 'Modulo não encontrado.'}, 404  # not found
+    def get(self):
+        try:
+            return {'modulos': [modulo.json() for modulo in ModuloModel.query.all()]}
+        except:
+            return {'message': 'Server error.'}, 500 # not found
 
     @jwt_required()
-    def post(self, modulo_id):
-        if ModuloModel.find_modulo(modulo_id):
-            return {"message": "O módulo de ID '{}' já existe.".format(modulo_id)}, 400  # Bad Request
+    def post(self):
         dados = Modulo.argumentos.parse_args()
-        modulo = ModuloModel(modulo_id, **dados)
+        modulo = ModuloModel(**dados)
         try:
             modulo.save_modulo()
         except:

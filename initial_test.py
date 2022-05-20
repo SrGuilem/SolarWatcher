@@ -1,6 +1,6 @@
 from flask import Flask, jsonify
 from flask_restful import Api
-from resources.modulo import Modulos, Modulo
+from resources.modulo import Modulo
 from resources.usuario import User, UserRegister, UserLogin, UserLogout
 from flask_jwt_extended import JWTManager
 from blocklist import BLOCKLIST
@@ -29,7 +29,7 @@ def token_de_acesso_invalidado(jwt_header, jwt_payload):
 
 
 # http://127.0.0.1:5000/medidas
-api.add_resource(Modulos, '/modulos')
+api.add_resource(Modulo, '/modulos')
 api.add_resource(User, '/usuarios/<int:user_id>')
 api.add_resource(UserRegister, '/cadastro')
 api.add_resource(UserLogin, '/login')
