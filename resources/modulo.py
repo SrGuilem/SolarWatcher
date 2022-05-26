@@ -18,7 +18,6 @@ class Modulo(Resource):
         except:
             return {'message': 'Server error.'}, 500 # not found
 
-    @jwt_required()
     def post(self):
         dados = Modulo.argumentos.parse_args()
         modulo = ModuloModel(**dados)

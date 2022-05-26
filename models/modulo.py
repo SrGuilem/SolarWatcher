@@ -15,6 +15,7 @@ class ModuloModel(banco.Model):
 
     def json(self):
         return {
+            'modulo_id': self.modulo_id,
             'corrente': self.corrente,
             'tensao': self.tensao,
             'data_hora': self.data_hora
